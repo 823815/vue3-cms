@@ -20,7 +20,7 @@ class HttpRequset {
     //添加所有实例的请求拦截器
     this.instance.interceptors.request.use(
       (config) => {
-        return config
+        return config.data
       },
       (err) => {
         return err
@@ -37,19 +37,28 @@ class HttpRequset {
     )
   }
 
-  request(config: HttpRequsetConfig): void {
-    // 单独请求的请求拦截器
-    if (config.interceptors?.requestInterceptor) {
-      config = config.interceptors.requestInterceptor(config)
-    }
-
-    this.instance.request(config).then((res) => {
-      // 单独请求的响应拦截器
-      if (config.interceptors?.responseInterceptor) {
-        config = config.interceptors.responseInterceptor(res)
+  request<T>(config: HttpRequsetConfig): Promise<T> {
+    return new Promise((resolve, reject) => {
+      // 单独请求的请求拦截器
+      if (config.interceptors?.requestInterceptor) {
+        config = config.interceptors.requestInterceptor(config)
       }
-      console.log(res)
+      this.instance
+        .request<any, T>(config)
+        .then((res) => {
+          // 单独请求的响应拦截器
+          if (config.interceptors?.responseInterceptor) {
+            config = config.interceptors.responseInterceptor(res)
+          }
+          resolve(res)
+        })
+        .catch((err) => {
+          reject(err)
+        })
     })
+  }
+  get<T>(config: HttpRequsetConfig): Promise<T> {
+    return this.request(config)
   }
 }
 
