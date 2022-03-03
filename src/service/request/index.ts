@@ -37,7 +37,7 @@ class HttpRequset {
     )
   }
 
-  request<T>(config: HttpRequsetConfig): Promise<T> {
+  request<T>(config: HttpRequsetConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
       // 单独请求的请求拦截器
       if (config.interceptors?.requestInterceptor) {
@@ -57,8 +57,20 @@ class HttpRequset {
         })
     })
   }
-  get<T>(config: HttpRequsetConfig): Promise<T> {
-    return this.request(config)
+  get<T>(config: HttpRequsetConfig<T>): Promise<T> {
+    return this.request({ ...config, method: 'GET' })
+  }
+
+  post<T>(config: HttpRequsetConfig<T>): Promise<T> {
+    return this.request({ ...config, method: 'POST' })
+  }
+
+  delete<T>(config: HttpRequsetConfig<T>): Promise<T> {
+    return this.request({ ...config, method: 'DELETE' })
+  }
+
+  patch<T>(config: HttpRequsetConfig<T>): Promise<T> {
+    return this.request({ ...config, method: 'GET' })
   }
 }
 
