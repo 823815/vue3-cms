@@ -13,37 +13,18 @@
 
 <script lang="ts" setup>
 import { reactive } from 'vue'
+import { rules } from '../config/account-config'
+import { defineExpose } from 'vue'
 const acount = reactive({
   name: '',
   password: ''
 })
-
-const rules = {
-  name: [
-    {
-      require: true,
-      message: '用户名为必传内容',
-      trigger: 'blur'
-    },
-    {
-      pattern: /^[a-z0-9]{5,10}$/,
-      message: '用户名为5到10位的数字或字母',
-      trigger: 'blur'
-    }
-  ],
-  password: [
-    {
-      require: true,
-      message: '密码为必传内容',
-      trigger: 'blur'
-    },
-    {
-      pattern: /^[a-z0-9]{6,}$/,
-      message: '密码至少6位',
-      trigger: 'blur'
-    }
-  ]
+const loginAction = () => {
+  console.log('登陆中')
 }
+defineExpose({
+  loginAction
+})
 </script>
 
 <style scoped></style>
