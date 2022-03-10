@@ -1,8 +1,8 @@
 <template>
   <div class="login-panel">
     <h1 class="title">后台管理系统</h1>
-    <el-tabs type="border-card" stretch>
-      <el-tab-pane>
+    <el-tabs type="border-card" stretch v-model="currentTab">
+      <el-tab-pane name="acconut">
         <template #label>
           <span>
             <el-icon><lock /></el-icon>账号登录
@@ -11,13 +11,13 @@
         <LoginAccount ref="accountRef"></LoginAccount>
       </el-tab-pane>
 
-      <el-tab-pane>
+      <el-tab-pane name="phone">
         <template #label>
           <span>
             <el-icon><iphone /></el-icon>手机登录
           </span>
         </template>
-        <LoginPhone></LoginPhone>
+        <LoginPhone ref="phoneRef"></LoginPhone>
       </el-tab-pane>
     </el-tabs>
     <div class="account-control">
@@ -38,10 +38,16 @@ import LoginAccount from './login-account.vue'
 import LoginPhone from './login-phone.vue'
 
 const isKeepPassword = ref(true)
+const currentTab = ref<string>('acconut')
 const accountRef = ref<InstanceType<typeof LoginAccount>>()
+const phoneRef = ref<InstanceType<typeof LoginPhone>>()
 
 const handleLoginClick = () => {
-  accountRef.value?.loginAction()
+  if (currentTab.value === 'acconut') {
+    accountRef.value?.loginAction(isKeepPassword.value)
+  } else {
+    phoneRef.value?.loginAction()
+  }
 }
 </script>
 

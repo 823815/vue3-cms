@@ -20,7 +20,7 @@ class HttpRequset {
     //添加所有实例的请求拦截器
     this.instance.interceptors.request.use(
       (config) => {
-        return config.data
+        return config
       },
       (err) => {
         return err
@@ -29,7 +29,7 @@ class HttpRequset {
     //添加所有实例的响应拦截器
     this.instance.interceptors.response.use(
       (config) => {
-        return config
+        return config.data
       },
       (err) => {
         return err
@@ -48,7 +48,7 @@ class HttpRequset {
         .then((res) => {
           // 单独请求的响应拦截器
           if (config.interceptors?.responseInterceptor) {
-            config = config.interceptors.responseInterceptor(res)
+            res = config.interceptors.responseInterceptor(res)
           }
           resolve(res)
         })
@@ -58,19 +58,19 @@ class HttpRequset {
     })
   }
   get<T>(config: HttpRequsetConfig<T>): Promise<T> {
-    return this.request({ ...config, method: 'GET' })
+    return this.request<T>({ ...config, method: 'GET' })
   }
 
   post<T>(config: HttpRequsetConfig<T>): Promise<T> {
-    return this.request({ ...config, method: 'POST' })
+    return this.request<T>({ ...config, method: 'POST' })
   }
 
   delete<T>(config: HttpRequsetConfig<T>): Promise<T> {
-    return this.request({ ...config, method: 'DELETE' })
+    return this.request<T>({ ...config, method: 'DELETE' })
   }
 
   patch<T>(config: HttpRequsetConfig<T>): Promise<T> {
-    return this.request({ ...config, method: 'GET' })
+    return this.request<T>({ ...config, method: 'PATCH' })
   }
 }
 

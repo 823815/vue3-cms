@@ -7,7 +7,7 @@ export const rules = {
       trigger: 'blur'
     },
     {
-      pattern: /^[a-z0-9]{5,10}$/,
+      pattern: /^[A-z0-9]{5,10}$/,
       message: '用户名为5到10位的数字或字母',
       trigger: 'blur'
     }
@@ -31,7 +31,7 @@ export const rules = {
       trigger: 'blur'
     },
     {
-      pattern: /^[a-z0-9]{6,}$/,
+      pattern: /^[A-z0-9]{6,}$/,
       message: '密码至少6位',
       trigger: 'blur'
     }
