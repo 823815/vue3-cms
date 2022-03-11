@@ -1,9 +1,10 @@
 import httpRequset from '../index'
-import type { IAccount, IloginResult, IDataType } from './type'
+import type { IAccount, IloginResult, IDataType, IUserResult } from './type'
 
 enum LoginAPI {
   AccountLogin = '/login',
-  LoginUserInfo = '/users/'
+  LoginUserInfo = '/users/',
+  userMenus = '/role/'
 }
 
 export function accountLoginRequest(account: IAccount) {
@@ -14,7 +15,13 @@ export function accountLoginRequest(account: IAccount) {
 }
 
 export function getUserInfo(id: number) {
-  return httpRequset.get<IDataType<IloginResult>>({
+  return httpRequset.get<IDataType<IUserResult>>({
     url: LoginAPI.LoginUserInfo + id
+  })
+}
+
+export function getUserMenus(id: number) {
+  return httpRequset.get<IDataType>({
+    url: LoginAPI.userMenus + id + '/menu'
   })
 }
