@@ -1,21 +1,33 @@
 <template>
   <div class="main">
     <el-container class="main-content">
-      <el-aside width="210px">
-        <navMenu></navMenu>
+      <el-aside :width="isCollapse ? '60px' : '210px'">
+        <navMenu :isCollapse="isCollapse"></navMenu>
       </el-aside>
       <el-container class="page">
         <el-header class="page-header">
-          <nav-header />
+          <nav-header @fold-change="handleFoldChange" />
         </el-header>
-        <el-main class="page-content"> </el-main>
+        <el-main class="page-content">
+          <div class="page-info">
+            <router-view></router-view>
+          </div>
+        </el-main>
       </el-container>
     </el-container>
   </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
+
 import navMenu from '@/components/nav-menu'
+import navHeader from '@/components/nav-header'
+
+const isCollapse = ref(false)
+const handleFoldChange = (isFold: boolean) => {
+  isCollapse.value = isFold
+}
 </script>
 
 <style lang="less">
