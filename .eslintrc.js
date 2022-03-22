@@ -1,7 +1,8 @@
 module.exports = {
   root: true,
   env: {
-    node: true
+    node: true,
+    // 'vue/setup-compiler-macros': true,
   },
   extends: [
     'plugin:vue/vue3-essential',
@@ -20,5 +21,9 @@ module.exports = {
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off'
+  },
+  globals: {
+    defineProps: "readonly",
+    defineEmits: "readonly"
   }
 }

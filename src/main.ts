@@ -13,8 +13,8 @@ const app = createApp(App)
 for (const name in ElIcons) {
   app.component(name, (ElIcons as any)[name])
 }
+setupStore()
+app.use(store)
 
 app.use(router)
-app.use(store)
 app.mount('#app')
-setupStore()
