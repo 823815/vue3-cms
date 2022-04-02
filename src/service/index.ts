@@ -2,7 +2,7 @@ import HttpRequset from './request'
 import { BASE_URL, TIMEOUT } from './request/config'
 import LocalCache from '@/utils/cache'
 
-const hyRequest = new HttpRequset({
+const xuRequest = new HttpRequset({
   baseURL: BASE_URL,
   timeout: TIMEOUT,
   interceptors: {
@@ -18,4 +18,4 @@ const hyRequest = new HttpRequset({
     }
   }
 })
-export default hyRequest
+export default xuRequest

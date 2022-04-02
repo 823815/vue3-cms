@@ -6,16 +6,25 @@ export const fromConfig: IFrom = {
   labelWidth: '120px',
   fromItems: [
     {
+      field: 'id',
       type: 'input',
-      label: '用户名',
+      label: 'ID',
+      placeholder: '请输入ID'
+    },
+    {
+      field: 'name',
+      type: 'input',
+      label: 'name',
       placeholder: '请输入用户名'
     },
     {
+      field: 'password',
       type: 'password',
       label: '密码',
       placeholder: '请输入密码'
     },
     {
+      field: 'subject',
       type: 'select',
       label: 'subject',
       placeholder: '请选择',
@@ -25,6 +34,7 @@ export const fromConfig: IFrom = {
       ]
     },
     {
+      field: 'createTime',
       type: 'datepicker',
       label: '选择时间',
       otherOptions: {

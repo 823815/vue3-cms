@@ -15,7 +15,7 @@
     >
       <template v-for="item in userMenus" :key="item.id">
         <template v-if="item.type === 1">
-          <el-sub-menu :index="item.sort + ''">
+          <el-sub-menu :index="item.id + ''">
             <template #title>
               <el-icon>
                 <component
@@ -30,7 +30,7 @@
             <template v-for="subitem in item.children" :key="subitem.id"
               ><el-menu-item-group>
                 <el-menu-item
-                  :index="subitem.sort + ''"
+                  :index="subitem.id + ''"
                   @click="handleMenuItemClick(subitem)"
                   >{{ subitem.name }}</el-menu-item
                 >
@@ -66,7 +66,13 @@ const userMenus = computed(() => store.state.login.userMenus)
 
 const currentPath = route.path
 const menu = pathMapToMenu(userMenus.value, currentPath)
-const defaultValue = ref(menu.sort + '')
+const defaultValue = ref(menu) //有bug
+
+console.log(menu)
+
+// console.log(defaultValue.value)
+// console.log(userMenus.value)
+// console.log(currentPath)
 
 const handleMenuItemClick = (item: any) => {
   router.push({

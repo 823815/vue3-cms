@@ -1,5 +1,6 @@
 import httpRequset from '../index'
-import type { IAccount, IloginResult, IDataType, IUserResult } from './type'
+import type { IAccount, IloginResult, IUserResult } from './type'
+import type { IDataType } from '../types'
 
 enum LoginAPI {
   AccountLogin = '/login',

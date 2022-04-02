@@ -18,9 +18,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineEmits } from 'vue'
+import { ref, defineEmits, computed } from 'vue'
 import userInfo from './cpn/user-info.vue'
-import diyBreadcrumb, { IBreadCrumb } from '@/base-ui/breadCrumb'
+import diyBreadcrumb from '@/base-ui/breadCrumb'
 import { pathMapBreadcrumbs } from '@/utils/map-menus'
 import { useRoute } from 'vue-router'
 import { useStore } from '@/store'
@@ -32,9 +32,11 @@ const handleFoldClick = () => {
   emit('foldChange', isFold.value)
 }
 
-const rouet = useRoute().path
-const userMenus = useStore().state.login.userMenus
-const breadCrumb: IBreadCrumb[] = pathMapBreadcrumbs(userMenus, rouet)
+const breadCrumb = computed(() => {
+  const rouet = useRoute().path
+  const userMenus = useStore().state.login.userMenus
+  return pathMapBreadcrumbs(userMenus, rouet)
+})
 </script>
 
 <style scoped lang="less">

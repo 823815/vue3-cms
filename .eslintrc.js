@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   env: {
-    node: true,
+    node: true
     // 'vue/setup-compiler-macros': true,
   },
   extends: [
@@ -20,10 +20,11 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     '@typescript-eslint/no-var-requires': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/explicit-module-boundary-types': 'off'
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
+    // 'vue/no-mutating-props': 'off'
   },
   globals: {
-    defineProps: "readonly",
-    defineEmits: "readonly"
+    defineProps: 'readonly',
+    defineEmits: 'readonly'
   }
 }
