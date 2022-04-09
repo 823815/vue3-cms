@@ -3,10 +3,44 @@
     <page-search :fromConfig="fromConfig"></page-search>
   </div>
   <div class="content">
-    <xu-table :userList="userList" :propItems="propItems">
+    <xu-table
+      :userList="userList"
+      :propItems="propItems"
+      :showIndexColumn="showIndexColumn"
+      :showSelectColumn="showSelectColumn"
+      :title="title"
+      @selectionChange="selectionChange"
+    >
       <template #enable="scope">
-        {{ scope.row.enable ? '启用' : '禁用' }}
+        <el-button
+          plain
+          size="small"
+          :type="scope.row.enable ? 'success' : 'danger'"
+        >
+          {{ scope.row.enable ? '启用' : '禁用' }}
+        </el-button>
       </template>
+      <template #createAt="scope">
+        <span>{{ $filters.formatTime(scope.row.createAt) }}</span>
+      </template>
+      <template #updateAt="scope">
+        <span>{{ $filters.formatTime(scope.row.createAt) }}</span>
+      </template>
+      <template #operation>
+        <el-button type="primary">
+          <el-icon style="vertical-align: middle">
+            <edit />
+          </el-icon>
+          <span style="vertical-align: middle">编辑 </span></el-button
+        >
+        <el-button type="danger"
+          ><el-icon style="vertical-align: middle">
+            <delete />
+          </el-icon>
+          <span style="vertical-align: middle">删除 </span></el-button
+        >
+      </template>
+      <!-- <template #header>hhh</template> -->
     </xu-table>
   </div>
 </template>
@@ -28,6 +62,14 @@ store.dispatch('system/getPageListAction', {
     size: 10
   }
 })
+
+const showIndexColumn = true
+const showSelectColumn = true
+const title = '用户列表'
+
+const selectionChange = (value: any) => {
+  console.log(value)
+}
 
 const userList = computed(() => store.state.system.userList)
 
@@ -72,6 +114,11 @@ const propItems: IPropItems[] = [
     prop: 'roleId',
     label: '角色',
     width: ''
+  },
+  {
+    prop: 'operation',
+    label: '操作',
+    width: '200'
   }
 ]
 </script>
